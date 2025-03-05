@@ -1,77 +1,327 @@
-.hero {
-  height: 80vh;
-  background: url("") center/cover no-repeat;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: white;
+/* General Styles */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; 
 }
 
-.hero-content h1 {
-  font-size: 3rem;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+}
+
+.page-container {
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+section {
+  padding: 5rem 0;
+  scroll-margin-top: 80px; 
+}
+
+section h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
   margin-bottom: 1rem;
 }
 
-.hero button {
-  padding: 10px 20px;
-  background-color: #0073e6;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.section-description {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  max-width: 800px;
+  margin: 0 auto 3rem auto;
 }
 
-.hero button:hover {
-  background-color: #005bb5;
+/* Header Styles */
+.main-header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
 }
 
 .home-logo {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
-  margin-left: 20px;
-  margin-right: auto;
 }
 
 .home-logo a {
   text-decoration: none;
   color: white;
-  transition: background-color 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 .home-logo a:hover {
-  color: #0073e6;
-}
-
-nav {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  padding: 0;
-  margin-top: 1.5rem;
+  color: #3b82f6;
 }
 
 .nav-items {
   display: flex;
-  gap: 20px;
-  padding-left: 0;
+  gap: 2rem;
   list-style: none;
+}
+
+.nav-items a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.nav-items a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #3b82f6;
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), 
+              url("https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=2070") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  padding: 0 1rem;
+}
+
+.hero-content {
+  max-width: 800px;
+}
+
+.hero-content h1 {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.hero-description {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  line-height: 1.6;
+}
+
+/* Team Section */
+.team-section {
+  background-color: white;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+.team-member {
+  background-color: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.team-member:hover {
+  transform: translateY(-5px);
+}
+
+.member-image {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+}
+
+.member-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.member-info {
+  padding: 1.5rem;
+}
+
+.member-info h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.member-info h4 {
+  color: #3b82f6;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.member-info p {
+  color: #666;
+}
+
+/* Activities Section */
+.activities-section {
+  background-color: #f8f9fa;
+}
+
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+.activity-card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.activity-card:hover {
+  transform: translateY(-5px);
+}
+
+.activity-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.activity-card h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.activity-card p {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Social Media Section */
+.social-section {
+  background-color: #3b82f6;
+  color: white;
+  text-align: center;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.social-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid white;
+  border-radius: 2rem;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  background-color: white;
+  color: #3b82f6;
+}
+
+/* Buttons */
+.cta-button {
+  display: inline-block;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.125rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #3b82f6;
   color: white;
 }
-.nav-items li {
-  margin-right: 20px;
-  font-size: 18px;
-}
 
-.nav-items li a {
+.cta-button:hover {
+  background-color: #2563eb;
+  transform: translateY(-2px);
   text-decoration: none;
-  color: rgb(255, 255, 255);
-  transition: background-color 0.3s ease;
+  color: white;
 }
 
-.nav-items li a:hover {
-  background-color: #f0f0f0;
-  color: #0073e6;
-  background-color: black;
+/* Responsive Design */
+@media (max-width: 768px) {
+  section {
+    padding: 3rem 0;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.25rem;
+  }
+  
+  .hero-description {
+    font-size: 1rem;
+  }
+  
+  .nav-items {
+    gap: 1rem;
+  }
+  
+  .nav-items a {
+    font-size: 1rem;
+    padding: 0.25rem 0.5rem;
+  }
+  
+  .home-logo {
+    font-size: 20px;
+  }
+  
+  .social-links {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .social-link {
+    display: block;
+    width: 200px;
+  }
 }
