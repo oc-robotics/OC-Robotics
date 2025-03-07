@@ -1,0 +1,38 @@
+.activities-section {
+    background-color: #f8f9fa;
+}
+  
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 0 1rem;
+}
+
+.activity-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.activity-card:hover {
+    transform: translateY(-5px);
+}
+
+.activity-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.activity-card h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.activity-card p {
+    line-height: 1.6;
+}
