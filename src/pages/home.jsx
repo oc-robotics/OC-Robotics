@@ -1,50 +1,61 @@
-import React, { useState } from "react";
-import { db } from "./firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import React from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
 
 const Home = () => {
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div>
-      <Header />
+    <div className="page-container">
+      <Header scrollToSection={scrollToSection} />
       <Hero />
+      <Team />
+      <Activities />
+      <SocialMedia />
     </div>
   );
 };
 
-const Header = () => {
+const Header = ({ scrollToSection }) => {
   return (
-    <header>
-      <NavBar />
+    <header className="main-header">
+      <NavBar scrollToSection={scrollToSection} />
     </header>
   );
 };
 
-const NavBar = () => {
+const NavBar = ({ scrollToSection }) => {
   return (
     <nav>
       <div className="home-logo">
-        <Link to="/">OCRG</Link>
+        <a href="#" onClick={(e) => {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}>OC Robotics</a>
       </div>
       <ul className="nav-items">
         <li>
-          <Link to="/about">About</Link>
+          <a href="#about" onClick={(e) => {
+            e.preventDefault();
+            scrollToSection('about');
+          }}>About</a>
         </li>
         <li>
-          <Link to="/team">Team</Link>
+          <a href="#team" onClick={(e) => {
+            e.preventDefault();
+            scrollToSection('team');
+          }}>Team</a>
         </li>
         <li>
-          <Link to="/robots">Robots</Link>
-        </li>
-        <li>
-          <Link to="/sponsors">Sponsors</Link>
-        </li>
-        <li>
-          <Link to="/recruitment">Recruitment</Link>
-        </li>
-        <li>
-          <Link to="/contact">Contact</Link>
+          <a href="#join" onClick={(e) => {
+            e.preventDefault();
+            scrollToSection('join');
+          }}>Join Us</a>
         </li>
       </ul>
     </nav>
@@ -53,64 +64,130 @@ const NavBar = () => {
 
 const Hero = () => {
   return (
-    <section className="hero">
+    <section className="hero" id="about">
       <div className="hero-content">
-        <h1>Welcome to the Robotics Club</h1>
-        <p className="text-red-500">
-          Building the future of robotics, one innovation at a time.
+        <h1>OC Robotics</h1>
+        <p className="hero-subtitle">Innovating Tomorrow, Today</p>
+        <p className="hero-description">
+          We are Orange Coast College's newest robotics club, bringing together passionate students
+          to explore the fascinating world of robotics. Join us in our journey of learning,
+          building, and innovating together.
         </p>
-        <JoinUsComponent />
+        <a href="#join" className="cta-button" onClick={(e) => {
+          e.preventDefault();
+          document.getElementById('join').scrollIntoView({ behavior: 'smooth' });
+        }}>
+          Be Part of Our Journey
+        </a>
       </div>
     </section>
   );
 };
 
-const JoinUsComponent = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-
-  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-  const handleJoinClick = async () => {
-    if (!name || !email) {
-      alert("Please fill in all fields.");
-      return;
-    }
-    if (!isValidEmail(email)) {
-      alert("Please enter a valid email.");
-      return;
-    }
-    try {
-      await addDoc(collection(db, "users"), {
-        name,
-        email,
-        joinedAt: serverTimestamp(),
-      });
-      alert("Thank you for joining!");
-      setName("");
-      setEmail("");
-    } catch (error) {
-      console.error("Error adding user: ", error);
-    }
-  };
+const Team = () => {
+  const teamMembers = [
+    {
+      name: "Name 1",
+      role: "President",
+      image: "/team/member1.jpg",
+      description: "Computer Science major with a passion for robotics"
+    },
+    {
+      name: "Name 2",
+      role: "Vice President",
+      image: "/team/member2.jpg",
+      description: "Engineering enthusiast focused on mechanical design"
+    },
+    
+  ];
 
   return (
-    <div className="join-us-container">
-      <h2>Join Us</h2>
-      <input
-        type="text"
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <button onClick={handleJoinClick}>Join Us</button>
+    <section className="team-section" id="team">
+      <div className="container">
+        <h2>Our Team</h2>
+        <p className="section-description">Meet the passionate individuals driving innovation in robotics</p>
+        <div className="team-grid">
+          {teamMembers.map((member, index) => (
+            <TeamMember key={index} {...member} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const TeamMember = ({ name, role, image, description }) => {
+  return (
+    <div className="team-member">
+      <div className="member-image">
+        <img src={image} alt={name} />
+      </div>
+      <div className="member-info">
+        <h3>{name}</h3>
+        <h4>{role}</h4>
+        <p>{description}</p>
+      </div>
     </div>
+  );
+};
+
+const Activities = () => {
+  return (
+    <section className="activities-section" id="activities">
+      <div className="container">
+        <h2>What We Do</h2>
+        <p className="section-description">Explore the exciting activities our club offers</p>
+        <div className="activities-grid">
+          <ActivityCard 
+            title="Build & Learn"
+            description="Get hands-on experience building robots and learning about mechanical design, electronics, and programming."
+            icon="🤖"
+          />
+          <ActivityCard 
+            title="Weekly Workshops"
+            description="Join our weekly workshops where we explore different aspects of robotics and work on exciting projects."
+            icon="🔧"
+          />
+          <ActivityCard 
+            title="Team Projects"
+            description="Collaborate with fellow members on various robotics projects and prepare for future competitions."
+            icon="👥"
+          />
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const ActivityCard = ({ title, description, icon }) => {
+  return (
+    <div className="activity-card">
+      <div className="activity-icon">{icon}</div>
+      <h3>{title}</h3>
+      <p>{description}</p>
+    </div>
+  );
+};
+
+const SocialMedia = () => {
+  return (
+    <section className="social-section" id="join">
+      <div className="container">
+        <h2>Join Our Community</h2>
+        <p className="section-description">Ready to be part of something amazing? Connect with us through any of these platforms!</p>
+        <div className="social-links">
+          <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="social-link">
+            Instagram
+          </a>
+          <a href="https://discord.com/" target="_blank" rel="noopener noreferrer" className="social-link">
+            Discord
+          </a>
+          <a href="mailto:contact@ocrobotics.com" className="social-link">
+            Email
+          </a>
+        </div>
+      </div>
+    </section>
   );
 };
 
